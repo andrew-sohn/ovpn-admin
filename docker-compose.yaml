@@ -13,7 +13,8 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-      - 7777:1194 # for openvpn
+      - 1194:1194 # for openvpn
+      - 443:443 # TCP
       - 8080:8080 # for ovpn-admin because of network_mode
     volumes:
       - ./easyrsa_master:/etc/openvpn/easyrsa
@@ -28,7 +29,7 @@ services:
       OVPN_VERBOSE: "True"
       OVPN_NETWORK: "192.168.100.0/24"
       EASYRSA_PATH: "/mnt/easyrsa"
-      OVPN_SERVER: "127.0.0.1:7777:tcp"
+      OVPN_SERVER: "127.0.0.1:443:tcp"
       OVPN_INDEX_PATH: "/mnt/easyrsa/pki/index.txt"
     network_mode: service:openvpn
     volumes:
